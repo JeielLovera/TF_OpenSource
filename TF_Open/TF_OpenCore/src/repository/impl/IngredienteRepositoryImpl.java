@@ -1,19 +1,24 @@
 package pe.edu.upc.repository.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import pe.edu.upc.model.entity.Ingrediente;
-import pe.edu.upc.repository.IIngredienteRepository;
+import pe.edu.upc.entity.Ingrediente;
+import pe.edu.upc.repository.IngredienteRepository;
 
-public class IngredienteRepository implements IIngredienteRepository{
-
+@Named
+public class IngredienteRepositoryImpl implements IngredienteRepository, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@PersistenceContext(unitName = "TF_OpenPU")
 	private EntityManager em;
+	
 	@Override
 	public Integer Insert(Ingrediente t) throws Exception {
 		em.persist(t);
@@ -35,7 +40,7 @@ public class IngredienteRepository implements IIngredienteRepository{
 	@Override
 	public List<Ingrediente> FindAll() throws Exception {
 		
-		List<Ingrediente> ingredientes= new ArrayList();
+		List<Ingrediente> ingredientes= new ArrayList<>();
 		TypedQuery<Ingrediente> query=em.createQuery("SELECT i FROM Ingrediente i", Ingrediente.class);
 		ingredientes=query.getResultList();
 		return ingredientes;
@@ -44,8 +49,8 @@ public class IngredienteRepository implements IIngredienteRepository{
 	@Override
 	public Ingrediente FindById(Ingrediente t) throws Exception {
 		
-		List<Ingrediente> ingredientes= new ArrayList();
-		TypedQuery<Ingrediente> query=em.createQuery("SELECT i FROM Ingrediente i WHERE tp.CIngrediente=?1", Ingrediente.class);
+		List<Ingrediente> ingredientes= new ArrayList<>();
+		TypedQuery<Ingrediente> query=em.createQuery("SELECT i FROM Ingrediente i WHERE CIngrediente=?1", Ingrediente.class);
 		query.setParameter(1, t.getCIngrediente());
 		ingredientes=query.getResultList();
 		if(ingredientes !=null && !ingredientes.isEmpty()){

@@ -1,4 +1,4 @@
-package pe.edu.upc.model.entity;
+package pe.edu.upc.entity;
 
 import java.io.Serializable;
 
@@ -18,8 +18,6 @@ public class Ingrediente implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	@Column(name = "CIngrediente")
 	private Integer CIngrediente;
 	
 	@Column(name = "NIngrediente", length = 50, nullable = false)
@@ -33,7 +31,7 @@ public class Ingrediente implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "CTipoIngrediente",nullable = false)
-	private TipoIngrediente TipoIngrediente;
+	private TipoIngrediente CTipoIngrediente;
 
 	public Integer getCIngrediente() {
 		return CIngrediente;
@@ -67,13 +65,14 @@ public class Ingrediente implements Serializable{
 		NUnidadMedidaIngrediente = nUnidadMedidaIngrediente;
 	}
 
-	public TipoIngrediente getTipoIngrediente() {
-		return TipoIngrediente;
+	public TipoIngrediente getCTipoIngrediente() {
+		return CTipoIngrediente;
 	}
 
-	public void setTipoIngrediente(TipoIngrediente tipoIngrediente) {
-		TipoIngrediente = tipoIngrediente;
+	public void setCTipoIngrediente(TipoIngrediente cTipoIngrediente) {
+		CTipoIngrediente = cTipoIngrediente;
 	}
+
 	
 	
 	

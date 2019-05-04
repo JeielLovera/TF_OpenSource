@@ -1,7 +1,7 @@
 package pe.edu.upc.repository;
 
-import pe.edu.upc.model.entity.Ingrediente;
+import pe.edu.upc.entity.Ingrediente;
 
-public interface IIngredienteRepository extends JpaRepository<Ingrediente>{
+public interface IngredienteRepository extends JpaRepository<Ingrediente>{
 
 }

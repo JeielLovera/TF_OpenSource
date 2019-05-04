@@ -1,45 +1,58 @@
 package pe.edu.upc.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import pe.edu.model.entity.Ingrediente;
-import pe.edu.repository.TipoProductoRepository;
-import pe.edu.upc.repository.impl.IngredienteRepository;
-import pe.edu.upc.service.IIngredienteService;
+import pe.edu.upc.entity.Ingrediente;
+import pe.edu.upc.entity.TipoIngrediente;
+import pe.edu.upc.repository.IngredienteRepository;
+import pe.edu.upc.repository.TipoIngredienteRepository;
+import pe.edu.upc.service.IngredienteService;
+
 
 
 @Named
-public class IngredienteService implements IIngredienteService{
+public class IngredienteServiceImpl implements IngredienteService, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
-	private TipoProductoRepository tipoProductoRepo;
+	private TipoIngredienteRepository tipoIngredienteRepo;
+	@Inject
 	private IngredienteRepository ingreRepo;
+	
+	@Transactional
 	@Override
 	public Integer Insert(Ingrediente t) throws Exception {
-		ingreRepo.Insert(t);
-		return t.getCIngrediente();
+		TipoIngrediente tpingrediente=tipoIngredienteRepo.FindById(t.getCTipoIngrediente());
+		t.setCTipoIngrediente(tpingrediente);
+		return ingreRepo.Insert(t);
 	}
+	
 	@Transactional
 	@Override
 	public Integer Update(Ingrediente t) throws Exception {
-		ingreRepo.Update(t);
-		return t.getCIngrediente();
+		TipoIngrediente tpingrediente=tipoIngredienteRepo.FindById(t.getCTipoIngrediente());
+		t.setCTipoIngrediente(tpingrediente);
+		return ingreRepo.Update(t);
 	}
+	
 	@Transactional
 	@Override
 	public Integer Delete(Ingrediente t) throws Exception {
-		ingreRepo.Delete(t);
-		return 1;
+		TipoIngrediente tpingrediente=tipoIngredienteRepo.FindById(t.getCTipoIngrediente());
+		t.setCTipoIngrediente(tpingrediente);
+		return ingreRepo.Delete(t);
 	}
-	@Transactional
+
 	@Override
 	public List<Ingrediente> FindAll() throws Exception {
 		return ingreRepo.FindAll();
 	}
-	@Transactional
+
 	@Override
 	public Ingrediente FindById(Ingrediente t) throws Exception {
 		return ingreRepo.FindById(t);

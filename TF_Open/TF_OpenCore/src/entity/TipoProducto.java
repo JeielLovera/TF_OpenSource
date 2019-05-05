@@ -30,9 +30,5 @@ public class TipoProducto implements Serializable{
 	}
 	public void setNTipoProducto(String nTipoProducto) {
 		NTipoProducto = nTipoProducto;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
+	}	
 }
